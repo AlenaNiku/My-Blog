@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,13 +8,15 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ArticlesList from './pages/ArticlesList';
 import ArticlePage from './pages/ArticlePage';
+import NavBar from './NavBar';
 
-class App extends React.Component {
+class App extends Component {
   render() {
 
     return (
       <Router>
         <div className="App">
+          <NavBar />
           <div id="page-body">
             <Route path="/" component={HomePage} exact />
             <Route path="/about" component={AboutPage} />
