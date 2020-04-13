@@ -16,3 +16,5 @@ const HomePage = () => (
 );
 
 export default HomePage
+
+// Landing page that you will find on any blog
