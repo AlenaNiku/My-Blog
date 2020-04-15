@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArticlesList from '../components/ArticlesList';
+import CommentsList from '../components/CommentsList';
 import articleContent from './article-content';
 import NotFoundPage from './NotFoundPage';
 
@@ -14,6 +15,7 @@ const ArticlePage = ({ match }) => {
       const fetchData = async () => {
         const result = await fetch(`/api/articles/${name}`)
         const body = await result.json();
+        // console.log(body)
         setArticleInfo(body);
       }
       fetchData();
@@ -30,11 +32,14 @@ const ArticlePage = ({ match }) => {
         {article.content.map((paragraph, key) => (
             <p key={key}>{paragraph}</p> 
         ))}
+
+        <CommentsList comments={articleInfo.comments} />
+
         <h3>Other Articles:</h3>
         <ArticlesList articles={otherArticles} />
       </>
     );
-}
+} 
 
 export default ArticlePage;
 
