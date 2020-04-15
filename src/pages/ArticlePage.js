@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ArticlesList from '../components/ArticlesList';
 import articleContent from './article-content';
 import NotFoundPage from './NotFoundPage';
@@ -7,6 +7,13 @@ const ArticlePage = ({ match }) => {
     const name = match.params.name;
     const article = articleContent.find(article => article.name === name);
 
+    // we're defining articleInfo - which we ll populate by sending request to the server and setArticleInfo - which is a function that we can call to change the value of articleInfo
+    const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [] }); // initial values
+
+    useEffect(() => {
+      setArticleInfo({ upvotes: 3 });
+    });
+
     if (!article) return <NotFoundPage />
 
     const otherArticles = articleContent.filter(article => article.name !== name)  // to display the list of other articles on the bottom of the one we're looking at
@@ -14,8 +21,9 @@ const ArticlePage = ({ match }) => {
     return (
       <>
         <h1>{article.title}</h1>
+        <p>This post has been upvoted {articleInfo.upvotes} times</p>
         {article.content.map((paragraph, key) => (
-            <p key={key}>{paragraph}</p>
+            <p key={key}>{paragraph}</p> 
         ))}
         <h3>Other Articles:</h3>
         <ArticlesList articles={otherArticles} />
@@ -31,3 +39,7 @@ export default ArticlePage;
 
 // add a conditional in case the article doesn't exist
 // (!article) = means doesn't exist
+
+// fetch is an asynchronous function that we call from our front-end
+
+// react hooks - functions that we can call that abstract away state management for our components
